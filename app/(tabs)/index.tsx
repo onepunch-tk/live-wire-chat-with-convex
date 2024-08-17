@@ -1,31 +1,23 @@
-import { StyleSheet } from 'react-native';
+import { Text, View } from "react-native";
+import { styled } from "nativewind";
+import { cn } from "@/utils/tw-helpers";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+const StyledView = styled(View);
+const StyledText = styled(Text);
 
 export default function TabOneScreen() {
+  const groups = useQuery(api.functions.groups.getGroup);
+  console.log(groups);
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+    <StyledView
+      className={cn(
+        "flex",
+        true && "flex-1 items-center justify-center bg-amber-300",
+      )}
+    >
+      <StyledText>Hello World!🚀</StyledText>
+    </StyledView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
