@@ -208,3 +208,9 @@ $RECYCLE.BIN/
 
 expo-env.d.ts
 # @end expo-cli
+
+# project structure
+structure.txt
+
+#Convex
+convex/_generated
