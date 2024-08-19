@@ -1,15 +1,12 @@
 import { Text, View } from "react-native";
 import { styled } from "nativewind";
 import { cn } from "@/utils/tw-helpers";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
+import SignInWithGithub from "@/components/oauth/SignInWithGithub";
 
 const StyledView = styled(View);
 const StyledText = styled(Text);
 
 export default function TabOneScreen() {
-  const groups = useQuery(api.functions.groups.getGroup);
-  console.log(groups);
   return (
     <StyledView
       className={cn(
@@ -18,6 +15,7 @@ export default function TabOneScreen() {
       )}
     >
       <StyledText>Hello World!🚀</StyledText>
+      <SignInWithGithub />
     </StyledView>
   );
 }
