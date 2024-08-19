@@ -1,6 +1,6 @@
-import { mutation, query } from "@/convex/_generated/server";
 import { v } from "convex/values";
 import { GROUPS_TABLE } from "@/convex/constant";
+import { mutation, query } from "@/convex/_generated/server";
 
 export const getGroup = query({
   args: {},

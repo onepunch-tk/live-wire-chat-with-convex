@@ -4,7 +4,9 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
-import { ConvexProvider, ConvexReactClient } from "convex/react";
+import { ConvexReactClient } from "convex/react";
+import { ConvexAuthProvider } from "@convex-dev/auth/react";
+import * as SecureStore from "expo-secure-store";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -22,6 +24,12 @@ SplashScreen.preventAutoHideAsync();
 const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL!, {
   unsavedChangesWarning: false,
 });
+
+const secureStorage = {
+  getItem: SecureStore.getItemAsync,
+  setItem: SecureStore.setItemAsync,
+  removeItem: SecureStore.deleteItemAsync,
+};
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -44,11 +52,10 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-
   return (
-    <ConvexProvider client={convex}>
+    <ConvexAuthProvider client={convex} storage={secureStorage}>
       <RootLayoutNav />
-    </ConvexProvider>
+    </ConvexAuthProvider>
   );
 }
 
